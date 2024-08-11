@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -19,6 +20,7 @@ import ru.andreymerkulov.cbrcurrency.model.CurrencyRate;
 import ru.andreymerkulov.cbrcurrency.model.CurrencyRateId;
 import ru.andreymerkulov.cbrcurrency.repository.CurrencyRateRepository;
 import ru.andreymerkulov.cbrcurrency.repository.CurrencyRepository;
+import ru.andreymerkulov.cbrcurrency.scheduler.CurrencyScheduler;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -32,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @RequiredArgsConstructor
+@MockBean(CurrencyScheduler.class)
 public class CurrencyServiceIntegrationTest {
 
     private static final PostgresTestContainer POSTGRES_CONTAINER = PostgresTestContainer.getInstance();
@@ -71,10 +74,6 @@ public class CurrencyServiceIntegrationTest {
 
         File testDataFile = new File("src/test/resources/cbr-response.json");
         CbrResponse cbrResponse = objectMapper.readValue(testDataFile, CbrResponse.class);
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-//        OffsetDateTime dt = OffsetDateTime.parse("2024-08-10T11:30:00+03:00", formatter);
-//        cbrResponse.setDate(dt);
 
         currencyService.saveCurrencyData(cbrResponse);
 

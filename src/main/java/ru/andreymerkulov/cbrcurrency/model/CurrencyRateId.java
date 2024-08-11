@@ -6,7 +6,6 @@ import lombok.Data;
 
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Embeddable

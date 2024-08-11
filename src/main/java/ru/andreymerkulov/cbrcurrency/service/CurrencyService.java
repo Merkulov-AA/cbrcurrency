@@ -1,7 +1,6 @@
 package ru.andreymerkulov.cbrcurrency.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,11 +71,5 @@ public class CurrencyService {
         } catch (IOException e) {
             log.error("Error fetching or parsing currency data: {}", e.getMessage());
         }
-    }
-
-    private LocalDateTime parseDate(LocalDateTime date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-        String formattedDate = date.format(formatter);
-        return LocalDateTime.parse(formattedDate, formatter);
     }
 }

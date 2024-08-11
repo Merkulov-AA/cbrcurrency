@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-currency_rate-table.yaml
+      author: merkulov
+      changes:
+        - createTable:
+            tableName: currency_rate
+            columns:
+              - column:
+                  name: num_code
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: decimal
+                  constraints:
+                    nullable: false
+            primaryKey:
+              constraintName: pk_currency_rate
+              columns:
+                - column:
+                    name: num_code
+                - column:
+                    name: rate_date

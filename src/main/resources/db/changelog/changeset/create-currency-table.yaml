@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-currency-table
+      author: merkulov
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: num_code
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: char_code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+            primaryKey:
+              constraintName: pk_currency
+              columns:
+                - column:
+                    name: num_code

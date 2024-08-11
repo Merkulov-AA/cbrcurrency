@@ -1,0 +1,7 @@
+cbr:
+  api-url: https://www.cbr-xml-daily.ru/daily_json.js
+
+spring:
+  task:
+    scheduling:
+      enabled: false

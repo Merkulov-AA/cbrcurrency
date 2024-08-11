@@ -14,6 +14,7 @@ public class CurrencyRate implements Serializable {
     @EmbeddedId
     private CurrencyRateId id;
 
+    @Column(name = "value")
     private BigDecimal value;
 
     @ManyToOne

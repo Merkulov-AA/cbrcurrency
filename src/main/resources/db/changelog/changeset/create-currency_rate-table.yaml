@@ -13,7 +13,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: rate_date
-                  type: datetime
+                  type: TIMESTAMPTZ
                   constraints:
                     nullable: false
               - column:

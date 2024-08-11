@@ -1,0 +1,11 @@
+databaseChangeLog:
+- changeSet:
+    id: set_timezone
+    author: merkulov
+    preConditions:
+      - onFail: MARK_RAN
+      - dbms:
+          type: postgresql
+    changes:
+      - sql:
+          sql: SET TimeZone TO 'Europe/Moscow';

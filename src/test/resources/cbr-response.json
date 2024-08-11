@@ -1,0 +1,26 @@
+{
+  "Date": "2024-08-10T11:30:00+03:00",
+  "PreviousDate": "2024-08-09T11:30:00+03:00",
+  "PreviousURL": "//www.cbr-xml-daily.ru/archive/2024/08/09/daily_json.js",
+  "Timestamp": "2024-08-11T11:00:00+03:00",
+  "Valute": {
+    "AUD": {
+      "ID": "R01010",
+      "NumCode": "036",
+      "CharCode": "AUD",
+      "Nominal": 1,
+      "Name": "Австралийский доллар",
+      "Value": 58.0043,
+      "Previous": 56.7155
+    },
+    "AZN": {
+      "ID": "R01020A",
+      "NumCode": "944",
+      "CharCode": "AZN",
+      "Nominal": 1,
+      "Name": "Азербайджанский манат",
+      "Value": 51.76,
+      "Previous": 50.9189
+    }
+  }
+}

@@ -8,7 +8,7 @@ public class CbrValute {
 
     @JsonProperty("ID")
     private String id;
-    private String numCode;
+    private Integer numCode;
     private String charCode;
     private Integer nominal;
     private String name;

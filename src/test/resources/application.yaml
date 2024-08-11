@@ -1,22 +1,18 @@
 spring:
-  application:
-    name=cbrcurrency
-
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  task:
-    scheduling:
-      pool:
-        size: 1
-  logging:
-    level:
-      ru.andreymerkulov.cbrcurrency: DEBUG
-
   liquibase:
     change-log: classpath:db/changelog/changelog-master.yaml
+  jpa:
+    hibernate:
+      ddl-auto: none
+  task:
+    scheduling:
+      enabled: false
 
 cbr:
   api-url: https://www.cbr-xml-daily.ru/daily_json.js
+

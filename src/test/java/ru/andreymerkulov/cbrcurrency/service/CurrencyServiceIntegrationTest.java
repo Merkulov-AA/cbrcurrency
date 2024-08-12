@@ -41,12 +41,7 @@ public class CurrencyServiceIntegrationTest {
 
     @DynamicPropertySource
     static void postgresqlProperties(DynamicPropertyRegistry registry) {
-        POSTGRES_CONTAINER //addFileSystemBind
-                .withClasspathResourceMapping(
-                        "cbr-response.json"
-                        , "/testdata/cbr-response.json"
-                        , BindMode.READ_ONLY)
-                .start();
+        POSTGRES_CONTAINER.start();
         registry.add("spring.datasource.url", POSTGRES_CONTAINER::getJdbcUrl);
         registry.add("spring.datasource.username", POSTGRES_CONTAINER::getUsername);
         registry.add("spring.datasource.password", POSTGRES_CONTAINER::getPassword);

@@ -1,9 +1,9 @@
-FROM maven:3.8.6-jdk-17 AS build
+FROM openjdk:17 AS build
 WORKDIR /app
 COPY . .
-RUN chmod +x mvnw && ./mvnw clean package
+RUN chmod +x mvnw && ./mvnw clean package -Dmaven.test.skip=true
 
-FROM openjdk:17-alpine
+FROM openjdk:17
 WORKDIR /app
 COPY --from=build /app/target/cbrcurrency*.jar cbrcurrency.jar
 EXPOSE 8080

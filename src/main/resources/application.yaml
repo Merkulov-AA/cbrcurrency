@@ -20,3 +20,14 @@ spring:
 
 cbr:
   api-url: https://www.cbr-xml-daily.ru/daily_json.js
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, metrics, info
+#  metrics:
+#    export:
+#      prometheus:
+#        enabled: true
+#        step: 1h

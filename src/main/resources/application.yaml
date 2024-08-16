@@ -18,6 +18,12 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/changelog-master.yaml
 
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
 cbr:
   api-url: https://www.cbr-xml-daily.ru/daily_json.js
 

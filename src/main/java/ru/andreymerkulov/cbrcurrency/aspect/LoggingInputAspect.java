@@ -21,7 +21,11 @@ public class LoggingInputAspect {
         log.info(joinPoint.getSignature().toString());
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
-            log.info(arg.toString());
+            if (arg != null) {
+                log.info(arg.toString());
+            }else{
+                log.info("NULL");
+            }
         }
     }
 }

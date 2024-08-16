@@ -40,7 +40,7 @@ public class CurrencyService {
     private final CurrencyRepository currencyRepository;
     private final CurrencyRateRepository currencyRateRepository;
 
-    public void run(){
+    public void run() throws IOException {
         try {
             CbrResponse cbrResponse = fetch();
             saveCurrencyData(cbrResponse);
@@ -48,6 +48,7 @@ public class CurrencyService {
             log.info("Currency data fetched and saved successfully.");
         } catch (IOException e) {
             log.error("Error fetching or parsing currency data: {}", e.getMessage());
+            throw e;
         }
     }
 

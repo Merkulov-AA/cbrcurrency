@@ -37,6 +37,7 @@ services:
     networks:
       - cbrcurrency-network
     environment:
+      DOCKER_HOST: tcp://dind:2375
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-cbrcurrency:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres

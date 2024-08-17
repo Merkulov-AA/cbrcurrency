@@ -37,7 +37,7 @@ jobs:
           python-version: '3.x'
       - name: Install Docker Compose
         run: |
-          pip install PyYAML==5.4.1
+          pip install PyYAML==5.4.0
           pip install docker-compose
 
       - name: Build Docker image

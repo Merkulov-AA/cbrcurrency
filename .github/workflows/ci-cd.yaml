@@ -40,6 +40,9 @@ jobs:
       - name: Build Docker image
         run: docker-compose build
 
+      - name: Save Docker image as tar archive
+        run: docker save docker.io/library/cbrcurrency_app -o cbrcurrency.tar
+
       - name: Save Docker image as artifact
         uses: actions/upload-artifact@v3
         with:

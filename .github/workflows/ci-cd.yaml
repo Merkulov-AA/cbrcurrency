@@ -1,0 +1,40 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Build and test
+        run: ./mvnw clean install -DskipTests=false
+
+  build-docker-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker-compose build
+
+      - name: Save Docker image as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cbrcurrency-service-image
+          path: cbrcurrency.tar

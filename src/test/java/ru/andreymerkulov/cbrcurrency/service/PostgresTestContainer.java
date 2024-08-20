@@ -1,6 +1,5 @@
 package ru.andreymerkulov.cbrcurrency.service;
 
-import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 public class PostgresTestContainer extends PostgreSQLContainer<PostgresTestContainer> {

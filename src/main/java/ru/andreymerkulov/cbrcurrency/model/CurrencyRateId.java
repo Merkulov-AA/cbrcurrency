@@ -2,9 +2,9 @@ package ru.andreymerkulov.cbrcurrency.model;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
-import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 

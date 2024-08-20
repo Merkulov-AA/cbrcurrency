@@ -19,7 +19,8 @@ public class MethodExecutionTimeMetricsAspect {
     private final MeterRegistry meterRegistry;
 
     @Pointcut("within(@org.springframework.stereotype.Service *)")
-    public void serviceMethods() {}
+    public void serviceMethods() {
+    }
 
     @Around("serviceMethods()")
     public Object measureMethodExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {

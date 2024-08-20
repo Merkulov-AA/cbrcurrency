@@ -5,23 +5,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import ru.andreymerkulov.cbrcurrency.dto.CbrResponse;
 import ru.andreymerkulov.cbrcurrency.dto.CbrValute;
 import ru.andreymerkulov.cbrcurrency.mapper.CurrencyMapper;
+import ru.andreymerkulov.cbrcurrency.mapper.CurrencyRateMapper;
 import ru.andreymerkulov.cbrcurrency.model.Currency;
 import ru.andreymerkulov.cbrcurrency.model.CurrencyRate;
-import ru.andreymerkulov.cbrcurrency.model.CurrencyRateId;
 import ru.andreymerkulov.cbrcurrency.repository.CurrencyRateRepository;
 import ru.andreymerkulov.cbrcurrency.repository.CurrencyRepository;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 @Service
@@ -36,10 +34,15 @@ public class CurrencyService {
     private final ObjectMapper objectMapper;
     private final RestTemplate restTemplate;
     private final CurrencyMapper currencyMapper;
+    private final CurrencyRateMapper currencyRateMapper;
 
     private final CurrencyRepository currencyRepository;
     private final CurrencyRateRepository currencyRateRepository;
 
+    @Retryable(
+            value = {IOException.class},
+            maxAttempts = 4,
+            backoff = @Backoff(delay = 60000, multiplier = 3)) // delay = 1 minute
     public void run() throws IOException {
         try {
             CbrResponse cbrResponse = fetch();
@@ -57,6 +60,7 @@ public class CurrencyService {
         return objectMapper.readValue(response, CbrResponse.class);
     }
 
+    @Transactional
     public void saveCurrencyData(CbrResponse cbrResponse) {
         for (Map.Entry<String, CbrValute> entry : cbrResponse.getValute().entrySet()) {
             CbrValute valute = entry.getValue();
@@ -67,14 +71,7 @@ public class CurrencyService {
                         return currencyRepository.save(newCurrency);
                     });
 
-            CurrencyRateId currencyRateId = new CurrencyRateId();
-            currencyRateId.setNumCode(currency.getNumCode());
-            currencyRateId.setRateDate(cbrResponse.getDate());
-
-            CurrencyRate currencyRate = new CurrencyRate();
-            currencyRate.setId(currencyRateId);
-            currencyRate.setCurrency(currency);
-            currencyRate.setValue(BigDecimal.valueOf(valute.getValue()));
+            CurrencyRate currencyRate = currencyRateMapper.toCurrencyRate(cbrResponse, currency, valute);
 
             currencyRateRepository.save(currencyRate);
         }

@@ -27,18 +27,18 @@ public class CurrencyRateService {
                 // Приводим LocalDateTime к OffsetDateTime с использованием зоны по умолчанию
                 OffsetDateTime offsetDateTime
                         = rateDate.atStartOfDay().plusDays(1)
-                            .atZone(ZoneId.systemDefault())
-                            .toOffsetDateTime();
+                        .atZone(ZoneId.systemDefault())
+                        .toOffsetDateTime();
                 return Optional.ofNullable(
                         currencyRateRepository
-                            .findTopByCurrencyNumCodeAndRateDateLessThanEqualOrderByRateDateDesc(
-                                  numCode
-                                , offsetDateTime
-                ));
+                                .findTopByCurrencyNumCodeAndRateDateLessThanEqualOrderByRateDateDesc(
+                                        numCode
+                                        , offsetDateTime
+                                ));
             } else {
                 return Optional.ofNullable(
                         currencyRateRepository
-                            .findTopByCurrencyNumCodeOrderByIdRateDateDesc(numCode)
+                                .findTopByCurrencyNumCodeOrderByIdRateDateDesc(numCode)
                 );
             }
         } else {

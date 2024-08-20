@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.containers.BindMode;
 import ru.andreymerkulov.cbrcurrency.dto.CbrResponse;
 import ru.andreymerkulov.cbrcurrency.dto.CbrValute;
 import ru.andreymerkulov.cbrcurrency.model.Currency;
@@ -24,8 +23,6 @@ import ru.andreymerkulov.cbrcurrency.scheduler.CurrencyScheduler;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,11 +83,11 @@ public class CurrencyServiceIntegrationTest {
         audId.setNumCode(valute.getNumCode());
         audId.setRateDate(cbrResponse.getDate());
         CurrencyRate audRate = currencyRateRepository
-                                    .findById(audId)
-                                    .orElse(null);
+                .findById(audId)
+                .orElse(null);
         assertNotNull(audRate);
-        assertEquals( BigDecimal.valueOf(valute.getValue())
-                    , audRate.getValue()
+        assertEquals(BigDecimal.valueOf(valute.getValue())
+                , audRate.getValue()
         );
     }
 

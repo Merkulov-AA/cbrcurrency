@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import ru.andreymerkulov.cbrcurrency.model.CurrencyRate;
 import ru.andreymerkulov.cbrcurrency.model.CurrencyRateId;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 public interface CurrencyRateRepository extends JpaRepository<CurrencyRate, CurrencyRateId> {
@@ -17,7 +16,7 @@ public interface CurrencyRateRepository extends JpaRepository<CurrencyRate, Curr
             "ORDER BY cr.id.rateDate DESC " +
             "LIMIT 1")
     CurrencyRate findTopByCurrencyNumCodeAndRateDateLessThanEqualOrderByRateDateDesc(
-              @Param("numCode") Integer numCode
+            @Param("numCode") Integer numCode
             , @Param("rateDate") OffsetDateTime rateDate);
 
     CurrencyRate findTopByCurrencyNumCodeOrderByIdRateDateDesc(Integer numCode);

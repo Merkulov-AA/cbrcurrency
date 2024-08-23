@@ -1,8 +1,10 @@
 package ru.andreymerkulov.cbrcurrency.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "currency")
@@ -13,7 +15,6 @@ public class Currency {
     @Column(name = "num_code")
     private Integer numCode;
 
-    @Column(name = "char_code")
     private String charCode;
 
     private String name;

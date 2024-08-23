@@ -1,8 +1,8 @@
 package ru.andreymerkulov.cbrcurrency.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -14,7 +14,6 @@ public class CurrencyRate implements Serializable {
     @EmbeddedId
     private CurrencyRateId id;
 
-    @Column(name = "value")
     private BigDecimal value;
 
     @ManyToOne

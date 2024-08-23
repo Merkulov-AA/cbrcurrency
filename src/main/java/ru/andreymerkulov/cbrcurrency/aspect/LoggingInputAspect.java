@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 public class LoggingInputAspect {
 
     @Pointcut("within(ru.andreymerkulov..*)")
-    public void projectMethods() {}
+    public void projectMethods() {
+    }
 
     @Before("projectMethods()")
     public void logBefore(JoinPoint joinPoint) {
@@ -23,7 +24,7 @@ public class LoggingInputAspect {
         for (Object arg : args) {
             if (arg != null) {
                 log.info(arg.toString());
-            }else{
+            } else {
                 log.info("NULL");
             }
         }

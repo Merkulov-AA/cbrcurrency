@@ -25,8 +25,7 @@ public class CurrencyRateController {
             String charCode,
             @RequestParam(required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate rateDate)
-    {
+            LocalDate rateDate) {
         Optional<CurrencyRate> rate = currencyRateService.getCurrencyRate(charCode, rateDate);
         return rate.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -5,7 +5,7 @@ import org.mapstruct.ReportingPolicy;
 import ru.andreymerkulov.cbrcurrency.dto.CbrValute;
 import ru.andreymerkulov.cbrcurrency.model.Currency;
 
-@Mapper(  componentModel = "spring"
+@Mapper(componentModel = "spring"
         , unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface CurrencyMapper {
 

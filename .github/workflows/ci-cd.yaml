@@ -67,3 +67,15 @@ jobs:
         run: |
           docker tag cbrcurrency:latest ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ steps.tag_version.outputs.new_tag }}
           docker push ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Login to SberCloud Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: cbrcurrency.cr.cloud.ru
+          username: ${{ secrets.SBERCLOUD_ID }}
+          password: ${{ secrets.SBERCLOUD_PASS }}
+
+      - name: Tag and push the Docker image
+        run: |
+          docker tag cbrcurrency:latest cbrcurrency.cr.cloud.ru/cbrcurrency:latest
+          docker push cbrcurrency.cr.cloud.ru/cbrcurrency:latest

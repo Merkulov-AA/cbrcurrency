@@ -16,7 +16,8 @@ public interface CurrencyRateMapper {
     @Mapping(target = "id.rateDate", source = "cbrResponse.date")
     @Mapping(target = "value", source = "valute.value")
     CurrencyRate toCurrencyRate(
-            CbrResponse cbrResponse
-            , Currency currency
-            , CbrValute valute);
+            CbrResponse cbrResponse,
+            Currency currency,
+            CbrValute valute
+    );
 }

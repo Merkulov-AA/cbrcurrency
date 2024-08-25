@@ -32,6 +32,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: cbrcurrency
+    image: cbrcurrency
     depends_on:
       - postgres
       - dind

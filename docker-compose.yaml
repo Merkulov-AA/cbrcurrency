@@ -14,19 +14,6 @@ services:
     networks:
       - cbrcurrency-network
 
-  dind:
-    image: docker:24-dind
-    privileged: true
-    environment:
-      - DOCKER_TLS_CERTDIR=
-    volumes:
-      #- /var/run/docker.sock:/var/run/docker.sock
-      - dind-storage:/var/lib/docker
-    ports:
-      - "2375:2375"
-    networks:
-      - cbrcurrency-network
-
   app:
     build:
       context: .
@@ -35,14 +22,11 @@ services:
     image: cbrcurrency
     depends_on:
       - postgres
-      - dind
     ports:
       - "8080:8080"
     networks:
       - cbrcurrency-network
     environment:
-      DOCKER_HOST: tcp://dind:2375
-      TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE: tcp://dind:2375
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-cbrcurrency:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
